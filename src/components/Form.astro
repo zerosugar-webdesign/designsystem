@@ -1,0 +1,771 @@
+---
+// BriefForm.astro
+// Multi-step brief form — ZeroSugar design system
+interface Props {
+    t?: (key: string) => string
+    lang?: string
+}
+---
+
+<div class="brief-form-wrap">
+    <!-- Progress bar -->
+    <div class="brief-progress" aria-hidden="true">
+        <div class="brief-progress__track">
+            <div class="brief-progress__bar" id="progress-bar"></div>
+        </div>
+        <div class="brief-progress__steps">
+            {
+                [1, 2, 3].map((n) => (
+                    <div
+                        class={`brief-step-dot ${n === 1 ? "active" : ""}`}
+                        data-step={n}
+                    >
+                        <span class="brief-step-dot__num">{n}</span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form id="brief-form" novalidate>
+        <!-- ── STEP 1: Identidad básica ── -->
+        <div class="brief-block active" data-block="1">
+            <div class="brief-block__header">
+                <span class="brief-step-label">01 / 03</span>
+                <h2 class="brief-block__title">Identidad básica</h2>
+                <p class="brief-block__sub">
+                    Cuéntanos quién eres antes de hablar de diseño.
+                </p>
+            </div>
+
+            <div class="brief-fields">
+                <div class="brief-field">
+                    <label class="brief-label" for="company"
+                        >Nombre de la empresa <span class="req">*</span></label
+                    >
+                    <input
+                        class="brief-input"
+                        type="text"
+                        id="company"
+                        name="company"
+                        placeholder="Ej: Talleres Ruiz"
+                        required
+                    />
+                </div>
+
+                <div class="brief-field">
+                    <label class="brief-label" for="email"
+                        >Email de contacto <span class="req">*</span></label
+                    >
+                    <input
+                        class="brief-input"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="hola@tuempresa.com"
+                        required
+                    />
+                </div>
+
+                <div class="brief-field">
+                    <label class="brief-label" for="sector"
+                        >Sector / tipo de negocio <span class="req">*</span
+                        ></label
+                    >
+                    <input
+                        class="brief-input"
+                        type="text"
+                        id="sector"
+                        name="sector"
+                        placeholder="Ej: Taller mecánico, Consultoría, E-commerce..."
+                        required
+                    />
+                </div>
+
+                <div class="brief-field">
+                    <label class="brief-label" for="city">Ciudad</label>
+                    <input
+                        class="brief-input"
+                        type="text"
+                        id="city"
+                        name="city"
+                        placeholder="Ej: Madrid"
+                    />
+                </div>
+            </div>
+
+            <div class="brief-nav">
+                <span></span>
+                <button
+                    type="button"
+                    class="brief-btn brief-btn--next"
+                    data-next="2"
+                >
+                    Siguiente
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        ><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+                    >
+                </button>
+            </div>
+        </div>
+
+        <!-- ── STEP 2: Personalidad de marca ── -->
+        <div class="brief-block" data-block="2">
+            <div class="brief-block__header">
+                <span class="brief-step-label">02 / 03</span>
+                <h2 class="brief-block__title">Personalidad de marca</h2>
+                <p class="brief-block__sub">Cómo quieres que te perciban.</p>
+            </div>
+
+            <div class="brief-fields">
+                <div class="brief-field">
+                    <label class="brief-label" for="keywords"
+                        >Describe tu empresa en 2-3 palabras <span class="req"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        class="brief-input"
+                        type="text"
+                        id="keywords"
+                        name="keywords"
+                        placeholder="Ej: moderna, cercana, técnica"
+                        required
+                    />
+                    <span class="brief-hint"
+                        >Adjetivos que definen tu tono y estilo.</span
+                    >
+                </div>
+
+                <div class="brief-field">
+                    <label class="brief-label" for="audience"
+                        >¿A quién va dirigida? <span class="req">*</span></label
+                    >
+                    <textarea
+                        class="brief-input brief-textarea"
+                        id="audience"
+                        name="audience"
+                        placeholder="Ej: Pymes de entre 5 y 50 empleados que quieren digitalizar sus procesos..."
+                        required
+                        rows="3"></textarea>
+                </div>
+
+                <div class="brief-field">
+                    <label class="brief-label" for="differentiator"
+                        >¿Qué te diferencia de tu competencia?</label
+                    >
+                    <textarea
+                        class="brief-input brief-textarea"
+                        id="differentiator"
+                        name="differentiator"
+                        placeholder="Ej: Somos los únicos de la zona con servicio express en 24h..."
+                        rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="brief-nav">
+                <button
+                    type="button"
+                    class="brief-btn brief-btn--back"
+                    data-prev="1"
+                >
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        ><path d="M19 12H5M12 19l-7-7 7-7"></path></svg
+                    >
+                    Anterior
+                </button>
+                <button
+                    type="button"
+                    class="brief-btn brief-btn--next"
+                    data-next="3"
+                >
+                    Siguiente
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        ><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+                    >
+                </button>
+            </div>
+        </div>
+
+        <!-- ── STEP 3: Estética ── -->
+        <div class="brief-block" data-block="3">
+            <div class="brief-block__header">
+                <span class="brief-step-label">03 / 03</span>
+                <h2 class="brief-block__title">Estética</h2>
+                <p class="brief-block__sub">Tu identidad visual en palabras.</p>
+            </div>
+
+            <div class="brief-fields">
+                <div class="brief-field">
+                    <label class="brief-label" for="colors"
+                        >¿Tienes colores corporativos?</label
+                    >
+                    <input
+                        class="brief-input"
+                        type="text"
+                        id="colors"
+                        name="colors"
+                        placeholder="Ej: azul marino y dorado, o #003366 y #FFD700"
+                    />
+                </div>
+
+                <div class="brief-field">
+                    <label class="brief-label" for="references"
+                        >Referencias visuales</label
+                    >
+                    <textarea
+                        class="brief-input brief-textarea"
+                        id="references"
+                        name="references"
+                        placeholder="Webs o marcas que te gusten y por qué..."
+                        rows="3"></textarea>
+                </div>
+
+                <div class="brief-field">
+                    <label class="brief-label"
+                        >Estilo preferido <span class="req">*</span></label
+                    >
+                    <div class="brief-style-grid">
+                        {
+                            [
+                                "Minimalista",
+                                "Corporativo",
+                                "Creativo",
+                                "Técnico",
+                            ].map((style) => (
+                                <label class="brief-style-card">
+                                    <input
+                                        type="radio"
+                                        name="style"
+                                        value={style}
+                                    />
+                                    <span class="brief-style-card__inner">
+                                        <span class="brief-style-card__name">
+                                            {style}
+                                        </span>
+                                    </span>
+                                </label>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="brief-nav">
+                <button
+                    type="button"
+                    class="brief-btn brief-btn--back"
+                    data-prev="2"
+                >
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        ><path d="M19 12H5M12 19l-7-7 7-7"></path></svg
+                    >
+                    Anterior
+                </button>
+                <button type="submit" class="brief-btn brief-btn--submit">
+                    Enviar brief
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        ><polyline points="20 6 9 17 4 12"></polyline></svg
+                    >
+                </button>
+            </div>
+        </div>
+
+        <!-- ── SUCCESS ── -->
+        <div class="brief-success" id="brief-success" aria-live="polite">
+            <div class="brief-success__icon">
+                <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#C8F135"
+                    stroke-width="2"
+                    ><polyline points="20 6 9 17 4 12"></polyline></svg
+                >
+            </div>
+            <h3 class="brief-success__title">Brief recibido</h3>
+            <p class="brief-success__sub">
+                Estamos trabajando en tu Sistema de Diseño. En breve lo
+                recibirás en tu correo. ¡Gracias por confiar en nosotros!
+            </p>
+        </div>
+    </form>
+</div>
+
+<style>
+    .brief-form-wrap {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    /* ── Progress ── */
+    .brief-progress {
+        margin-bottom: 40px;
+    }
+
+    .brief-progress__track {
+        height: 1px;
+        background: #222222;
+        position: relative;
+        margin-bottom: 16px;
+    }
+
+    .brief-progress__bar {
+        height: 1px;
+        background: #c8f135;
+        width: 33.33%;
+        transition: width 0.4s ease;
+    }
+
+    .brief-progress__steps {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .brief-step-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid #222222;
+        background: #111111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            border-color 0.3s ease,
+            background 0.3s ease;
+    }
+
+    .brief-step-dot.active {
+        border-color: #c8f135;
+        background: rgba(200, 241, 53, 0.08);
+    }
+
+    .brief-step-dot.done {
+        border-color: #c8f135;
+        background: #c8f135;
+    }
+
+    .brief-step-dot.done .brief-step-dot__num {
+        color: #000;
+    }
+
+    .brief-step-dot__num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #444444;
+        transition: color 0.3s ease;
+    }
+
+    .brief-step-dot.active .brief-step-dot__num {
+        color: #c8f135;
+    }
+
+    /* ── Blocks ── */
+    .brief-block {
+        display: none;
+        animation: blockIn 0.35s ease forwards;
+    }
+
+    .brief-block.active {
+        display: block;
+    }
+
+    @keyframes blockIn {
+        from {
+            opacity: 0;
+            transform: translateX(12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* ── Header ── */
+    .brief-step-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #c8f135;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .brief-block__title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(1.4rem, 3vw, 1.9rem);
+        color: #f0f0f0;
+        margin: 0 0 8px;
+        line-height: 1.1;
+    }
+
+    .brief-block__sub {
+        font-family: "Inter", sans-serif;
+        font-size: 15px;
+        color: #888888;
+        margin: 0 0 32px;
+        line-height: 1.6;
+    }
+
+    /* ── Fields ── */
+    .brief-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 32px;
+    }
+
+    .brief-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .brief-label {
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        color: #888888;
+        letter-spacing: 0.04em;
+    }
+
+    .req {
+        color: #c8f135;
+    }
+
+    .brief-hint {
+        font-family: "Inter", sans-serif;
+        font-size: 12px;
+        color: #444444;
+    }
+
+    .brief-input {
+        background: #161616;
+        border: 1px solid #222222;
+        border-radius: 2px;
+        padding: 12px 14px;
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        color: #f0f0f0;
+        outline: none;
+        transition: border-color 0.2s ease;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .brief-input::placeholder {
+        color: #444444;
+    }
+
+    .brief-input:focus {
+        border-color: #c8f135;
+    }
+
+    .brief-input.error {
+        border-color: #ef4444;
+    }
+
+    .brief-textarea {
+        resize: vertical;
+        min-height: 90px;
+    }
+
+    /* ── Style selector ── */
+    .brief-style-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .brief-style-card {
+        cursor: pointer;
+    }
+
+    .brief-style-card input[type="radio"] {
+        display: none;
+    }
+
+    .brief-style-card__inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        background: #161616;
+        border: 1px solid #222222;
+        border-radius: 2px;
+        transition:
+            border-color 0.2s ease,
+            background 0.2s ease;
+        text-align: center;
+    }
+
+    .brief-style-card input:checked + .brief-style-card__inner {
+        border-color: #c8f135;
+        background: rgba(200, 241, 53, 0.06);
+    }
+
+    .brief-style-card__name {
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        color: #888888;
+        transition: color 0.2s ease;
+    }
+
+    .brief-style-card
+        input:checked
+        + .brief-style-card__inner
+        .brief-style-card__name {
+        color: #c8f135;
+    }
+
+    /* ── Nav buttons ── */
+    .brief-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 8px;
+    }
+
+    .brief-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 2px;
+        border: none;
+        cursor: pointer;
+        transition:
+            opacity 0.15s ease,
+            transform 0.1s ease;
+        text-decoration: none;
+    }
+
+    .brief-btn--next,
+    .brief-btn--submit {
+        background: #c8f135;
+        color: #000;
+    }
+
+    .brief-btn--next:hover,
+    .brief-btn--submit:hover {
+        opacity: 0.88;
+        transform: scale(1.02);
+    }
+
+    .brief-btn--back {
+        background: transparent;
+        color: #888888;
+        border: 1px solid #222222;
+    }
+
+    .brief-btn--back:hover {
+        border-color: #444444;
+        color: #f0f0f0;
+    }
+
+    /* ── Success ── */
+    .brief-success {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 48px 24px;
+        gap: 16px;
+        animation: blockIn 0.4s ease forwards;
+    }
+
+    .brief-success.visible {
+        display: flex;
+    }
+
+    .brief-success__icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(200, 241, 53, 0.08);
+        border: 1px solid #c8f135;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brief-success__title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: #f0f0f0;
+        margin: 0;
+    }
+
+    .brief-success__sub {
+        font-family: "Inter", sans-serif;
+        font-size: 15px;
+        color: #888888;
+        margin: 0;
+        max-width: 380px;
+        line-height: 1.65;
+    }
+</style>
+
+<script>
+    const blocks = document.querySelectorAll<HTMLElement>(".brief-block")
+    const dots = document.querySelectorAll<HTMLElement>(".brief-step-dot")
+    const progressBar = document.getElementById("progress-bar")
+    const form = document.getElementById("brief-form") as HTMLFormElement
+    const success = document.getElementById("brief-success")
+
+    function goTo(step: number) {
+        blocks.forEach((b) => b.classList.remove("active"))
+        const target = document.querySelector<HTMLElement>(
+            `.brief-block[data-block="${step}"]`,
+        )
+        if (target) target.classList.add("active")
+
+        dots.forEach((d, i) => {
+            d.classList.remove("active", "done")
+            if (i + 1 < step) d.classList.add("done")
+            if (i + 1 === step) d.classList.add("active")
+        })
+
+        if (progressBar) {
+            progressBar.style.width = `${(step / blocks.length) * 100}%`
+        }
+    }
+
+    function validateBlock(blockNum: number): boolean {
+        const block = document.querySelector<HTMLElement>(
+            `.brief-block[data-block="${blockNum}"]`,
+        )
+        if (!block) return true
+        const required = block.querySelectorAll<
+            HTMLInputElement | HTMLTextAreaElement
+        >("[required]")
+        let valid = true
+        required.forEach((field) => {
+            field.classList.remove("error")
+            if (!field.value.trim()) {
+                field.classList.add("error")
+                valid = false
+            }
+        })
+        return valid
+    }
+
+    // Next buttons
+    document
+        .querySelectorAll<HTMLButtonElement>(".brief-btn--next")
+        .forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const current = parseInt(
+                    btn.closest<HTMLElement>(".brief-block")?.dataset.block ??
+                        "1",
+                )
+                if (validateBlock(current)) {
+                    goTo(parseInt(btn.dataset.next ?? "2"))
+                }
+            })
+        })
+
+    // Back buttons
+    document
+        .querySelectorAll<HTMLButtonElement>(".brief-btn--back")
+        .forEach((btn) => {
+            btn.addEventListener("click", () => {
+                goTo(parseInt(btn.dataset.prev ?? "1"))
+            })
+        })
+
+    // Submit
+    form?.addEventListener("submit", async (e) => {
+        e.preventDefault()
+
+        const lastBlock = blocks.length
+        if (!validateBlock(lastBlock)) return
+
+        const submitButton = form.querySelector<HTMLButtonElement>(
+            'button[type="submit"]',
+        )
+        if (!submitButton) return
+
+        const originalText = submitButton.textContent
+        submitButton.disabled = true
+        submitButton.textContent = "Enviando..."
+
+        const formData = new FormData(form)
+
+        // Adapta estos campos a tu formulario real
+        const data = Object.fromEntries(formData.entries())
+
+        try {
+            const response = await fetch(
+                "https://n8n.zerosugar.studio/webhook-test/design-system",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                },
+            )
+
+            const result = await response.json()
+
+            if (response.ok) {
+                // Mostrar estado de éxito
+                blocks.forEach((b) => (b.style.display = "none"))
+                if (progressBar) progressBar.style.width = "100%"
+                dots.forEach((d) => {
+                    d.classList.remove("active")
+                    d.classList.add("done")
+                })
+                success?.classList.add("visible")
+                form.reset()
+            } else {
+                alert(`Error: ${result.error || "Error desconocido"}`)
+            }
+        } catch (error) {
+            console.error("Error enviando formulario:", error)
+            alert("Error al enviar el formulario. Inténtalo de nuevo.")
+        } finally {
+            submitButton.disabled = false
+            submitButton.textContent = originalText
+        }
+    })
+</script>
