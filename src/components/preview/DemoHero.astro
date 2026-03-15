@@ -1,0 +1,173 @@
+---
+const { copy, colors, headingFont, bodyFont, borderRadius, shadowMd, spacing } =
+    Astro.props
+---
+
+<!-- Separador -->
+<section class="demo-divider">
+    <div class="divider-container">
+        <div class="divider-line"></div>
+        <p class="divider-tag">Demo en vivo</p>
+        <h2
+            class="divider-title"
+            style={`font-family: '${headingFont}', Georgia, serif;`}
+        >
+            Tu marca, aplicada
+        </h2>
+        <p class="divider-desc">
+            Esta es una landing de ejemplo para que veas tu design system en
+            acción. Los colores, tipografías, espaciado, sombras y bordes que
+            ves aquí son los de tu marca.
+        </p>
+    </div>
+</section>
+
+<!-- Hero -->
+<section
+    class="demo-hero"
+    style={`background-color: ${colors.primary}; padding: ${spacing[7]}px 0;`}
+>
+    <div class="hero-container">
+        <h1
+            class="hero-title"
+            style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.background};`}
+        >
+            {copy.heroTitle}
+        </h1>
+        <p
+            class="hero-subtitle"
+            style={`font-family: '${bodyFont}', system-ui, sans-serif; color: ${colors.accent};`}
+        >
+            {copy.heroSubtitle}
+        </p>
+        <a
+            href="#"
+            class="hero-cta"
+            style={`background-color: ${colors.accent}; color: ${colors.background}; font-family: '${bodyFont}', system-ui, sans-serif; border-radius: ${borderRadius.md}; box-shadow: ${shadowMd};`}
+            >{copy.cta}</a
+        >
+    </div>
+</section>
+
+<style>
+    .demo-divider {
+        padding: 48px 0;
+        text-align: center;
+    }
+
+    .divider-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .divider-line {
+        width: 48px;
+        height: 3px;
+        background-color: #d4ff00;
+        margin: 0 auto 24px;
+    }
+
+    .divider-tag {
+        font-size: 12px;
+        font-weight: 700;
+        color: #d4ff00;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .divider-title {
+        font-size: 36px;
+        color: #ffffff;
+    }
+
+    .divider-desc {
+        font-size: 15px;
+        color: #666;
+        max-width: 520px;
+        margin: 16px auto 0;
+        line-height: 1.7;
+    }
+
+    .hero-container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 24px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 48px;
+        line-height: 1.2;
+        margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+        line-height: 1.7;
+        margin-bottom: 40px;
+    }
+
+    .hero-cta {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 16px 40px;
+        text-decoration: none;
+        transition:
+            transform 0.2s,
+            box-shadow 0.2s;
+    }
+
+    .hero-cta:hover {
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .divider-title {
+            font-size: 28px;
+        }
+
+        .hero-title {
+            font-size: 36px;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .hero-cta {
+            font-size: 15px;
+            padding: 14px 32px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .demo-divider {
+            padding: 40px 0;
+        }
+
+        .divider-container {
+            padding: 0 16px;
+        }
+
+        .hero-container {
+            padding: 0 16px;
+        }
+
+        .hero-title {
+            font-size: 28px;
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+        }
+
+        .hero-cta {
+            padding: 14px 28px;
+            font-size: 14px;
+        }
+    }
+</style>

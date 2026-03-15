@@ -1,0 +1,181 @@
+---
+const { cssVariables, headingFont } = Astro.props
+---
+
+<section class="css-section">
+    <div class="css-container">
+        <p class="section-label">07 · CSS Variables</p>
+        <h2
+            class="section-title"
+            style={`font-family: '${headingFont}', Georgia, serif;`}
+        >
+            Listo para copiar y usar
+        </h2>
+
+        <div class="code-window">
+            <div class="code-toolbar">
+                <div class="code-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                </div>
+                <span class="code-filename">styles.css</span>
+                <button id="copy-btn" class="copy-button">Copiar</button>
+            </div>
+            <pre id="css-code" class="code-block">{cssVariables}</pre>
+        </div>
+    </div>
+</section>
+
+<script>
+    //@ts-nocheck
+    const btn = document.getElementById("copy-btn")
+    const code = document.getElementById("css-code")
+    btn.addEventListener("click", () => {
+        navigator.clipboard.writeText(code.textContent || "")
+        btn.textContent = "✓ Copiado"
+        btn.classList.add("copied")
+        setTimeout(() => {
+            btn.textContent = "Copiar"
+            btn.classList.remove("copied")
+        }, 1000)
+    })
+</script>
+
+<style>
+    .css-section {
+        background-color: #111111;
+        padding: 64px 0;
+    }
+
+    .css-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #555;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        font-size: 32px;
+        color: #ffffff;
+        margin-bottom: 40px;
+    }
+
+    .code-window {
+        background-color: #0a0a0a;
+        border: 1px solid #1a1a1a;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .code-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 20px;
+        border-bottom: 1px solid #1a1a1a;
+    }
+
+    .code-dots {
+        display: flex;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    .dot-red {
+        background-color: #dc2626;
+    }
+    .dot-yellow {
+        background-color: #f59e0b;
+    }
+    .dot-green {
+        background-color: #22c55e;
+    }
+
+    .code-filename {
+        font-family: monospace;
+        font-size: 11px;
+        color: #555;
+    }
+
+    .copy-button {
+        background-color: #d4ff00;
+        color: #0a0a0a;
+        border: none;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition: background-color 0.2s;
+    }
+
+    .copy-button:hover {
+        background-color: #bde600;
+    }
+
+    .copy-button.copied {
+        background-color: #22c55e;
+    }
+
+    .code-block {
+        padding: 24px;
+        margin: 0;
+        overflow-x: auto;
+        font-family: monospace;
+        font-size: 13px;
+        line-height: 1.8;
+        color: #999;
+        white-space: pre;
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 32px;
+        }
+
+        .code-block {
+            font-size: 11px;
+            padding: 16px;
+            line-height: 1.7;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .css-section {
+            padding: 48px 0;
+        }
+
+        .css-container {
+            padding: 0 16px;
+        }
+
+        .code-toolbar {
+            padding: 10px 14px;
+        }
+
+        .code-filename {
+            display: none;
+        }
+
+        .code-block {
+            font-size: 10px;
+            padding: 12px;
+        }
+    }
+</style>

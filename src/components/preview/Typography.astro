@@ -1,0 +1,321 @@
+---
+const { typography, voice, headingFont, bodyFont } = Astro.props
+---
+
+<section class="typo-section">
+    <div class="typo-container">
+        <p class="section-label">02 · Tipografía</p>
+        <h2
+            class="section-title"
+            style={`font-family: '${headingFont}', Georgia, serif;`}
+        >
+            Fuentes del sistema
+        </h2>
+
+        <div class="font-grid">
+            <!-- Heading font -->
+            <div class="font-card">
+                <p class="font-tag">Heading font</p>
+                <p class="font-var">--font-heading</p>
+                <p
+                    class="font-name"
+                    style={`font-family: '${headingFont}', Georgia, serif;`}
+                >
+                    {headingFont}
+                </p>
+                <p
+                    class="font-sample"
+                    style={`font-family: '${headingFont}', Georgia, serif;`}
+                >
+                    {voice.examplePhrases[0]}
+                </p>
+                <div class="font-specimen">
+                    <p
+                        class="font-aa"
+                        style={`font-family: '${headingFont}', Georgia, serif;`}
+                    >
+                        Aa
+                    </p>
+                    <p
+                        class="font-chars"
+                        style={`font-family: '${headingFont}', Georgia, serif;`}
+                    >
+                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                    </p>
+                    <p
+                        class="font-chars"
+                        style={`font-family: '${headingFont}', Georgia, serif;`}
+                    >
+                        abcdefghijklmnopqrstuvwxyz
+                    </p>
+                    <p
+                        class="font-chars"
+                        style={`font-family: '${headingFont}', Georgia, serif;`}
+                    >
+                        0123456789
+                    </p>
+                </div>
+            </div>
+
+            <!-- Body font -->
+            <div class="font-card">
+                <p class="font-tag" style="color: #22c55e;">Body font</p>
+                <p class="font-var">--font-body</p>
+                <p
+                    class="font-name"
+                    style={`font-family: '${bodyFont}', system-ui, sans-serif; font-size: 28px;`}
+                >
+                    {bodyFont}
+                </p>
+                <p
+                    class="font-sample-body"
+                    style={`font-family: '${bodyFont}', system-ui, sans-serif;`}
+                >
+                    {voice.examplePhrases[1]}
+                </p>
+                <div class="font-specimen">
+                    <p
+                        class="font-aa"
+                        style={`font-family: '${bodyFont}', system-ui, sans-serif;`}
+                    >
+                        Aa
+                    </p>
+                    <p
+                        class="font-chars"
+                        style={`font-family: '${bodyFont}', system-ui, sans-serif;`}
+                    >
+                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                    </p>
+                    <p
+                        class="font-chars"
+                        style={`font-family: '${bodyFont}', system-ui, sans-serif;`}
+                    >
+                        abcdefghijklmnopqrstuvwxyz
+                    </p>
+                    <p
+                        class="font-chars"
+                        style={`font-family: '${bodyFont}', system-ui, sans-serif;`}
+                    >
+                        0123456789
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Font scale -->
+        <div class="scale-card">
+            <p class="scale-tag">Escala tipográfica</p>
+            <div class="scale-list">
+                {
+                    Object.entries(typography.fontScale).map(([key, value]) => (
+                        <div class="scale-row">
+                            <span class="scale-var">--font-size-{key}</span>
+                            <span class="scale-value">{value}</span>
+                            <span
+                                class="scale-preview"
+                                style={`font-family: '${bodyFont}', system-ui, sans-serif; font-size: ${value};`}
+                            >
+                                Design System
+                            </span>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .typo-section {
+        background-color: #0a0a0a;
+        padding: 64px 0;
+    }
+
+    .typo-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #555;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        font-size: 32px;
+        color: #ffffff;
+        margin-bottom: 40px;
+    }
+
+    .font-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    .font-card {
+        background-color: #111111;
+        border: 1px solid #1a1a1a;
+        border-radius: 12px;
+        padding: 32px;
+    }
+
+    .font-tag {
+        font-size: 10px;
+        font-weight: 700;
+        color: #d4ff00;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .font-var {
+        font-family: monospace;
+        font-size: 11px;
+        color: #555;
+        margin-bottom: 24px;
+    }
+
+    .font-name {
+        font-size: 36px;
+        color: #ffffff;
+        line-height: 1.2;
+        margin-bottom: 16px;
+    }
+
+    .font-sample {
+        font-size: 18px;
+        color: #999;
+        font-style: italic;
+        line-height: 1.5;
+        margin-bottom: 24px;
+    }
+
+    .font-sample-body {
+        font-size: 16px;
+        color: #999;
+        line-height: 1.7;
+        margin-bottom: 24px;
+    }
+
+    .font-specimen {
+        border-top: 1px solid #1a1a1a;
+        padding-top: 16px;
+    }
+
+    .font-aa {
+        font-size: 48px;
+        color: #ffffff;
+        line-height: 1;
+    }
+
+    .font-chars {
+        font-size: 14px;
+        color: #555;
+        margin-top: 8px;
+    }
+
+    .scale-card {
+        background-color: #111111;
+        border: 1px solid #1a1a1a;
+        border-radius: 12px;
+        padding: 32px;
+        margin-top: 24px;
+    }
+
+    .scale-tag {
+        font-size: 10px;
+        font-weight: 700;
+        color: #d4ff00;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+    }
+
+    .scale-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .scale-row {
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+    }
+
+    .scale-var {
+        font-family: monospace;
+        font-size: 11px;
+        color: #555;
+        min-width: 100px;
+    }
+
+    .scale-value {
+        font-family: monospace;
+        font-size: 11px;
+        color: #888;
+        min-width: 40px;
+    }
+
+    .scale-preview {
+        color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+        .font-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 32px;
+        }
+
+        .font-name {
+            font-size: 28px;
+        }
+
+        .font-aa {
+            font-size: 36px;
+        }
+
+        .scale-row {
+            flex-wrap: wrap;
+            gap: 4px 16px;
+        }
+
+        .scale-preview {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .typo-section {
+            padding: 48px 0;
+        }
+
+        .typo-container {
+            padding: 0 16px;
+        }
+
+        .font-card {
+            padding: 24px;
+        }
+
+        .scale-card {
+            padding: 24px;
+        }
+
+        .font-chars {
+            font-size: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+</style>

@@ -1,0 +1,108 @@
+---
+const {
+    company,
+    colors,
+    headingFont,
+    bodyFont,
+    borderRadius,
+    shadowMd,
+    spacing,
+} = Astro.props
+---
+
+<section
+    class="demo-cta"
+    style={`background-color: ${colors.secondary}; padding: ${spacing[7]}px 0;`}
+>
+    <div class="cta-container">
+        <h2
+            class="cta-title"
+            style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.background};`}
+        >
+            ¿Listo para empezar?
+        </h2>
+        <p
+            class="cta-text"
+            style={`font-family: '${bodyFont}', system-ui, sans-serif; color: ${colors.accent};`}
+        >
+            Este design system es tuyo. Úsalo como base para construir la
+            identidad digital de {company}.
+        </p>
+        <a
+            href="https://zerosugar.studio"
+            class="cta-button"
+            style={`background-color: ${colors.accent}; color: ${colors.background}; font-family: '${bodyFont}', system-ui, sans-serif; border-radius: ${borderRadius.md}; box-shadow: ${shadowMd};`}
+            >Contactar con ZeroSugar</a
+        >
+    </div>
+</section>
+
+<style>
+    .cta-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0 24px;
+        text-align: center;
+    }
+
+    .cta-title {
+        font-size: 36px;
+        margin-bottom: 16px;
+    }
+
+    .cta-text {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 40px;
+    }
+
+    .cta-button {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 16px 40px;
+        text-decoration: none;
+        transition:
+            transform 0.2s,
+            box-shadow 0.2s;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .cta-title {
+            font-size: 28px;
+        }
+
+        .cta-text {
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+
+        .cta-button {
+            font-size: 15px;
+            padding: 14px 32px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .cta-container {
+            padding: 0 16px;
+        }
+
+        .cta-title {
+            font-size: 24px;
+        }
+
+        .cta-text {
+            font-size: 14px;
+        }
+
+        .cta-button {
+            padding: 14px 28px;
+            font-size: 14px;
+        }
+    }
+</style>

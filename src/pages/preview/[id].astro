@@ -1,0 +1,208 @@
+---
+//@ts-nocheck
+import { supabase } from "../../lib/supabase.js"
+import PreviewHeader from "../../components/preview/PreviewHeader.astro"
+import ColorPalette from "../../components/preview/ColorPalette.astro"
+import Typography from "../../components/preview/Typography.astro"
+import BrandVoice from "../../components/preview/BrandVoice.astro"
+import Spacing from "../../components/preview/Spacing.astro"
+import Shadows from "../../components/preview/Shadows.astro"
+import BorderRadius from "../../components/preview/BorderRadius.astro"
+import CssVariables from "../../components/preview/CssVariables.astro"
+import DemoHero from "../../components/preview/DemoHero.astro"
+import DemoProcess from "../../components/preview/DemoProcess.astro"
+import DemoFeatures from "../../components/preview/DemoFeatures.astro"
+import DemoStats from "../../components/preview/DemoStats.astro"
+import DemoTeam from "../../components/preview/DemoTeam.astro"
+import DemoTestimonial from "../../components/preview/DemoTestimonial.astro"
+import DemoCta from "../../components/preview/DemoCta.astro"
+import PreviewFooter from "../../components/preview/PreviewFooter.astro"
+
+const { id } = Astro.params
+
+const { data: project, error } = await supabase
+    .from("Design System Leads")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+console.log("ID recibido:", id)
+console.log("Tipo de ID:", typeof id)
+
+if (error || !project || project.status !== "Paid") {
+    return Astro.redirect("/")
+}
+
+const free =
+    typeof project.tokens_free === "string"
+        ? JSON.parse(project.tokens_free)
+        : project.tokens_free
+
+const premium =
+    typeof project.tokens_premium === "string"
+        ? JSON.parse(project.tokens_premium)
+        : project.tokens_premium
+
+const copy =
+    typeof project.copy_premium === "string"
+        ? JSON.parse(project.copy_premium)
+        : project.copy_premium
+
+const headingFont = free.typography.primaryFont.name
+const bodyFont = free.typography.secondaryFont.name
+const fontsUrl = `https://fonts.googleapis.com/css2?family=${headingFont.replace(/ /g, "+")}&family=${bodyFont.replace(/ /g, "+")}:wght@400;500;700&display=swap`
+---
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{project.company} · Design System Premium</title>
+        <link href={fontsUrl} rel="stylesheet" />
+        <style>
+            /* Reset */
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: #0a0a0a;
+                -webkit-font-smoothing: antialiased;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- HEADER -->
+        <PreviewHeader company={project.company} headingFont={headingFont} />
+
+        <!-- PALETA DE COLORES -->
+        <ColorPalette
+            colors={free.colorPalette}
+            radiusMd={premium.borderRadius.md}
+            shadowMd={premium.shadows.md}
+            headingFont={headingFont}
+        />
+
+        <!-- TIPOGRAFÍA -->
+        <Typography
+            typography={free.typography}
+            voice={free.brandVoice}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+        />
+
+        <!-- VOZ DE MARCA -->
+        <BrandVoice
+            voice={free.brandVoice}
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            borderRadius={premium.borderRadius}
+        />
+
+        <!-- ESPACIADO -->
+        <Spacing
+            spacing={premium.spacing}
+            accent={free.colorPalette.accent}
+            headingFont={headingFont}
+        />
+
+        <!-- SOMBRAS -->
+        <Shadows
+            shadows={premium.shadows}
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            borderRadius={premium.borderRadius}
+        />
+
+        <!-- BORDER RADIUS -->
+        <BorderRadius
+            borderRadius={premium.borderRadius}
+            primaryColor={free.colorPalette.primary}
+            headingFont={headingFont}
+            shadowSm={premium.shadows.sm}
+        />
+
+        <!-- CSS VARIABLES -->
+        <CssVariables
+            cssVariables={premium.cssVariables}
+            headingFont={headingFont}
+        />
+
+        <!-- DEMO: HERO -->
+        <DemoHero
+            copy={copy}
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+            borderRadius={premium.borderRadius}
+            shadowMd={premium.shadows.md}
+            spacing={premium.spacing}
+        />
+        <!-- DEMO: PROCESS -->
+        <DemoProcess
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+            borderRadius={premium.borderRadius}
+            shadowSm={premium.shadows.sm}
+            spacing={premium.spacing}
+        />
+
+        <!-- DEMO: FEATURES -->
+        <DemoFeatures
+            features={copy.features}
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+            borderRadius={premium.borderRadius}
+            shadowSm={premium.shadows.sm}
+            spacing={premium.spacing}
+        />
+
+        <!-- DEMO: STATS -->
+        <DemoStats
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+            spacing={premium.spacing}
+        />
+
+        <!-- DEMO: TEAM -->
+        <DemoTeam
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+            borderRadius={premium.borderRadius}
+            shadowSm={premium.shadows.sm}
+            spacing={premium.spacing}
+        />
+
+        <!-- DEMO: TESTIMONIAL -->
+        <DemoTestimonial
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+            borderRadius={premium.borderRadius}
+            shadowMd={premium.shadows.md}
+            spacing={premium.spacing}
+        />
+
+        <!-- DEMO: CTA FINAL -->
+        <DemoCta
+            company={project.company}
+            colors={free.colorPalette}
+            headingFont={headingFont}
+            bodyFont={bodyFont}
+            borderRadius={premium.borderRadius}
+            shadowMd={premium.shadows.md}
+            spacing={premium.spacing}
+        />
+
+        <!-- FOOTER -->
+        <PreviewFooter />
+    </body>
+</html>

@@ -1,0 +1,199 @@
+---
+//@ts-nocheck
+const { voice, colors, headingFont, borderRadius } = Astro.props
+---
+
+<section class="voice-section">
+    <div class="voice-container">
+        <p class="section-label">03 · Voz de marca</p>
+        <h2
+            class="section-title"
+            style={`font-family: '${headingFont}', Georgia, serif;`}
+        >
+            Personalidad y tono
+        </h2>
+
+        <!-- Adjetivos -->
+        <div class="adjective-row">
+            <span
+                class="adjective-pill"
+                style={`background-color: ${colors.primary}; color: ${colors.background}; border-radius: ${borderRadius.full};`}
+                >{voice.adjectives[0]}</span
+            >
+            <span
+                class="adjective-pill"
+                style={`background-color: ${colors.secondary}; color: ${colors.background}; border-radius: ${borderRadius.full};`}
+                >{voice.adjectives[1]}</span
+            >
+            <span
+                class="adjective-pill"
+                style={`background-color: ${colors.accent}; color: ${colors.background}; border-radius: ${borderRadius.full};`}
+                >{voice.adjectives[2]}</span
+            >
+        </div>
+
+        <!-- Frases -->
+        <div class="phrases-list">
+            {
+                voice.examplePhrases.map((phrase, i) => (
+                    <div
+                        class="phrase-card"
+                        style={`border-left-color: ${i === 0 ? colors.accent : colors.secondary}; border-radius: 0 ${borderRadius.md} ${borderRadius.md} 0;`}
+                    >
+                        <p
+                            class="phrase-text"
+                            style={`font-family: '${headingFont}', Georgia, serif;`}
+                        >
+                            "{phrase}"
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Palabras a evitar -->
+        <div class="avoid-card" style={`border-radius: ${borderRadius.lg};`}>
+            <p class="avoid-label">Palabras a evitar</p>
+            <div class="avoid-list">
+                {
+                    voice.wordsToAvoid.map((word) => (
+                        <span
+                            class="avoid-pill"
+                            style={`border-radius: ${borderRadius.full};`}
+                        >
+                            {word}
+                        </span>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .voice-section {
+        background-color: #111111;
+        padding: 64px 0;
+    }
+
+    .voice-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #555;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        font-size: 32px;
+        color: #ffffff;
+        margin-bottom: 40px;
+    }
+
+    .adjective-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+    }
+
+    .adjective-pill {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 8px 20px;
+    }
+
+    .phrases-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+
+    .phrase-card {
+        background-color: #0a0a0a;
+        border-left: 3px solid;
+        padding: 24px;
+    }
+
+    .phrase-text {
+        font-size: 18px;
+        color: #cccccc;
+        font-style: italic;
+        line-height: 1.7;
+    }
+
+    .avoid-card {
+        background-color: #0a0a0a;
+        border: 1px solid #1a1a1a;
+        padding: 24px;
+    }
+
+    .avoid-label {
+        font-size: 10px;
+        font-weight: 700;
+        color: #dc2626;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+
+    .avoid-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .avoid-pill {
+        font-size: 13px;
+        color: #dc2626;
+        background-color: rgba(220, 38, 38, 0.1);
+        padding: 6px 14px;
+        border: 1px solid rgba(220, 38, 38, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 32px;
+        }
+
+        .phrase-text {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .voice-section {
+            padding: 48px 0;
+        }
+
+        .voice-container {
+            padding: 0 16px;
+        }
+
+        .adjective-pill {
+            font-size: 13px;
+            padding: 6px 16px;
+        }
+
+        .phrase-card {
+            padding: 16px;
+        }
+
+        .phrase-text {
+            font-size: 15px;
+        }
+
+        .avoid-card {
+            padding: 16px;
+        }
+    }
+</style>

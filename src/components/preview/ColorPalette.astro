@@ -1,0 +1,134 @@
+---
+const { colors, radiusMd, shadowMd } = Astro.props
+
+const palette = [
+    { name: "Primary", value: colors.primary, cssVar: "--color-primary" },
+    { name: "Secondary", value: colors.secondary, cssVar: "--color-secondary" },
+    { name: "Accent", value: colors.accent, cssVar: "--color-accent" },
+    {
+        name: "Background",
+        value: colors.background,
+        cssVar: "--color-background",
+    },
+    { name: "Text", value: colors.text, cssVar: "--color-text" },
+    { name: "Muted", value: colors.muted, cssVar: "--color-muted" },
+]
+---
+
+<section class="color-section">
+    <div class="color-container">
+        <p class="section-label">01 · Paleta de color</p>
+        <h2
+            class="section-title"
+            style={`font-family: '${Astro.props.headingFont}', Georgia, serif;`}
+        >
+            Colores del sistema
+        </h2>
+
+        <div class="color-grid">
+            {
+                palette.map((color) => (
+                    <div class="color-item">
+                        <div
+                            class="color-swatch"
+                            style={`background-color: ${color.value}; border-radius: ${radiusMd}; box-shadow: ${shadowMd}; ${color.name === "Background" ? "border: 1px solid #333;" : ""}`}
+                        />
+                        <p class="color-hex">{color.value}</p>
+                        <p class="color-name">{color.name}</p>
+                        <p class="color-var">{color.cssVar}</p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .color-section {
+        background-color: #111111;
+        padding: 64px 0;
+    }
+
+    .color-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #555;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        font-size: 32px;
+        color: #ffffff;
+        margin-bottom: 40px;
+    }
+
+    .color-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+    }
+
+    .color-item {
+        text-align: center;
+    }
+
+    .color-swatch {
+        width: 100%;
+        aspect-ratio: 1;
+    }
+
+    .color-hex {
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+        margin-top: 12px;
+    }
+
+    .color-name {
+        font-size: 12px;
+        color: #888;
+        margin-top: 2px;
+    }
+
+    .color-var {
+        font-size: 11px;
+        color: #555;
+        font-family: monospace;
+        margin-top: 4px;
+    }
+
+    @media (max-width: 768px) {
+        .color-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 32px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .color-section {
+            padding: 48px 0;
+        }
+
+        .color-container {
+            padding: 0 16px;
+        }
+
+        .color-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+    }
+</style>

@@ -1,0 +1,146 @@
+---
+//@ts-nocheck
+const { spacing, accent, headingFont } = Astro.props
+---
+
+<section class="spacing-section">
+    <div class="spacing-container">
+        <p class="section-label">04 · Espaciado</p>
+        <h2
+            class="section-title"
+            style={`font-family: '${headingFont}', Georgia, serif;`}
+        >
+            Escala de espaciado
+        </h2>
+
+        <div class="spacing-card">
+            <div class="spacing-list">
+                {
+                    spacing.map((value, i) => (
+                        <div class="spacing-row">
+                            <span class="spacing-var">--spacing-{i + 1}</span>
+                            <span class="spacing-value">{value}px</span>
+                            <div class="spacing-bar-track">
+                                <div
+                                    class="spacing-bar"
+                                    style={`width: ${value}px; background-color: ${accent};`}
+                                />
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .spacing-section {
+        background-color: #0a0a0a;
+        padding: 64px 0;
+    }
+
+    .spacing-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #555;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        font-size: 32px;
+        color: #ffffff;
+        margin-bottom: 40px;
+    }
+
+    .spacing-card {
+        background-color: #111111;
+        border: 1px solid #1a1a1a;
+        border-radius: 12px;
+        padding: 32px;
+    }
+
+    .spacing-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .spacing-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .spacing-var {
+        font-family: monospace;
+        font-size: 11px;
+        color: #555;
+        min-width: 90px;
+    }
+
+    .spacing-value {
+        font-family: monospace;
+        font-size: 12px;
+        color: #888;
+        min-width: 40px;
+        text-align: right;
+    }
+
+    .spacing-bar-track {
+        flex: 1;
+    }
+
+    .spacing-bar {
+        height: 8px;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 32px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .spacing-section {
+            padding: 48px 0;
+        }
+
+        .spacing-container {
+            padding: 0 16px;
+        }
+
+        .spacing-card {
+            padding: 24px;
+        }
+
+        .spacing-row {
+            flex-wrap: wrap;
+            gap: 4px 12px;
+        }
+
+        .spacing-var {
+            min-width: 80px;
+            font-size: 10px;
+        }
+
+        .spacing-value {
+            min-width: 32px;
+            font-size: 11px;
+        }
+
+        .spacing-bar-track {
+            width: 100%;
+        }
+    }
+</style>

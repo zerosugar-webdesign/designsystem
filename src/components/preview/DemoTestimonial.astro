@@ -1,0 +1,135 @@
+---
+const { colors, headingFont, bodyFont, borderRadius, shadowMd, spacing } =
+    Astro.props
+---
+
+<section
+    class="demo-testimonial"
+    style={`background-color: ${colors.background}; padding: ${spacing[7]}px 0;`}
+>
+    <div class="testimonial-container">
+        <div
+            class="testimonial-card"
+            style={`border-left: 4px solid ${colors.accent}; border-radius: 0 ${borderRadius.lg} ${borderRadius.lg} 0; box-shadow: ${shadowMd};`}
+        >
+            <p
+                class="testimonial-quote"
+                style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.text};`}
+            >
+                "Desde el primer momento entendieron lo que buscábamos. El
+                resultado superó nuestras expectativas y el proceso fue
+                transparente de principio a fin."
+            </p>
+            <div class="testimonial-author">
+                <div
+                    class="author-avatar"
+                    style={`background-color: ${colors.primary};`}
+                >
+                    <span
+                        class="author-initial"
+                        style={`color: ${colors.background};`}>M</span
+                    >
+                </div>
+                <div>
+                    <p
+                        class="author-name"
+                        style={`font-family: '${bodyFont}', system-ui, sans-serif; color: ${colors.text};`}
+                    >
+                        María González
+                    </p>
+                    <p
+                        class="author-role"
+                        style={`font-family: '${bodyFont}', system-ui, sans-serif; color: ${colors.muted};`}
+                    >
+                        Directora creativa
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .testimonial-container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .testimonial-card {
+        background-color: #ffffff;
+        padding: 40px;
+    }
+
+    .testimonial-quote {
+        font-size: 22px;
+        font-style: italic;
+        line-height: 1.7;
+        margin-bottom: 32px;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .author-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .author-initial {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .author-name {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .author-role {
+        font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+        .testimonial-card {
+            padding: 32px;
+        }
+
+        .testimonial-quote {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .testimonial-container {
+            padding: 0 16px;
+        }
+
+        .testimonial-card {
+            padding: 24px;
+        }
+
+        .testimonial-quote {
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+        }
+
+        .author-initial {
+            font-size: 16px;
+        }
+    }
+</style>

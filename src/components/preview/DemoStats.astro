@@ -1,0 +1,89 @@
+---
+const { colors, headingFont, bodyFont, spacing } = Astro.props
+
+const stats = [
+    { number: "100+", label: "Proyectos realizados" },
+    { number: "15", label: "Años de experiencia" },
+    { number: "98%", label: "Clientes satisfechos" },
+]
+---
+
+<section
+    class="demo-stats"
+    style={`background-color: ${colors.secondary}; padding: ${spacing[7]}px 0;`}
+>
+    <div class="stats-container">
+        <div class="stats-grid">
+            {
+                stats.map((stat) => (
+                    <div class="stat-item">
+                        <p
+                            class="stat-number"
+                            style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.background};`}
+                        >
+                            {stat.number}
+                        </p>
+                        <p
+                            class="stat-label"
+                            style={`font-family: '${bodyFont}', system-ui, sans-serif; color: ${colors.accent};`}
+                        >
+                            {stat.label}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .stats-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 64px;
+        font-weight: 600;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
+
+    .stat-label {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+        .stat-number {
+            font-size: 48px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .stats-container {
+            padding: 0 16px;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .stat-number {
+            font-size: 56px;
+        }
+    }
+</style>

@@ -1,0 +1,102 @@
+---
+//@ts-nocheck
+const {
+    features,
+    colors,
+    headingFont,
+    bodyFont,
+    borderRadius,
+    shadowSm,
+    spacing,
+} = Astro.props
+---
+
+<section
+    class="demo-features"
+    style={`background-color: ${colors.background}; padding: ${spacing[7]}px 0;`}
+>
+    <div class="features-container">
+        <div class="features-grid">
+            {
+                features.map((feature) => (
+                    <div
+                        class="feature-card"
+                        style={`border-radius: ${borderRadius.lg}; box-shadow: ${shadowSm};`}
+                    >
+                        <h3
+                            class="feature-title"
+                            style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.primary};`}
+                        >
+                            {feature.title}
+                        </h3>
+                        <p
+                            class="feature-desc"
+                            style={`font-family: '${bodyFont}', system-ui, sans-serif; color: ${colors.text};`}
+                        >
+                            {feature.description}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .features-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .feature-card {
+        background-color: #ffffff;
+        padding: 32px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .feature-title {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .feature-desc {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+        .features-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .feature-card {
+            padding: 24px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .features-container {
+            padding: 0 16px;
+        }
+
+        .feature-card {
+            padding: 20px;
+        }
+    }
+</style>

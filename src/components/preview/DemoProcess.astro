@@ -1,0 +1,168 @@
+---
+const { colors, headingFont, bodyFont, borderRadius, shadowSm, spacing } =
+    Astro.props
+
+const steps = [
+    {
+        number: "01",
+        title: "Te escuchamos",
+        description:
+            "Entendemos tu visión, tus necesidades y el contexto de tu proyecto.",
+    },
+    {
+        number: "02",
+        title: "Diseñamos",
+        description:
+            "Creamos una propuesta a medida alineada con tus objetivos.",
+    },
+    {
+        number: "03",
+        title: "Construimos",
+        description:
+            "Ejecutamos con precisión y te acompañamos hasta el resultado final.",
+    },
+]
+---
+
+<section
+    class="demo-process"
+    style={`background-color: ${colors.background}; padding: ${spacing[7]}px 0;`}
+>
+    <div class="process-container">
+        <p class="section-label" style={`color: ${colors.muted};`}>
+            Cómo trabajamos
+        </p>
+        <h2
+            class="section-title"
+            style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.text};`}
+        >
+            Un proceso claro de principio a fin
+        </h2>
+
+        <div class="process-grid">
+            {
+                steps.map((step) => (
+                    <div
+                        class="process-step"
+                        style={`background-color: #ffffff; border-radius: ${borderRadius.lg}; box-shadow: ${shadowSm};`}
+                    >
+                        <span
+                            class="step-number"
+                            style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.accent};`}
+                        >
+                            {step.number}
+                        </span>
+                        <h3
+                            class="step-title"
+                            style={`font-family: '${headingFont}', Georgia, serif; color: ${colors.primary};`}
+                        >
+                            {step.title}
+                        </h3>
+                        <p
+                            class="step-desc"
+                            style={`font-family: '${bodyFont}', system-ui, sans-serif; color: ${colors.muted};`}
+                        >
+                            {step.description}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .process-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 32px;
+        margin-bottom: 48px;
+        text-align: center;
+    }
+
+    .process-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .process-step {
+        padding: 32px;
+        text-align: center;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .step-number {
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 1;
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    .step-title {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .step-desc {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 32px;
+        }
+
+        .process-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .process-step {
+            padding: 24px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto auto;
+            text-align: left;
+            gap: 0 16px;
+        }
+
+        .step-number {
+            font-size: 36px;
+            grid-row: 1 / 3;
+            align-self: center;
+            margin-bottom: 0;
+        }
+
+        .step-title {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .process-container {
+            padding: 0 16px;
+        }
+    }
+</style>

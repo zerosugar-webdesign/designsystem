@@ -1,0 +1,86 @@
+---
+const { company, headingFont } = Astro.props
+---
+
+<header class="preview-header">
+    <div class="header-container">
+        <div class="header-left">
+            <span
+                class="header-brand"
+                style={`font-family: '${headingFont}', Georgia, serif;`}
+                >{company}</span
+            >
+            <span class="header-dot">·</span>
+            <span class="header-label">Design System</span>
+        </div>
+        <span class="header-badge">Premium</span>
+    </div>
+</header>
+
+<style>
+    .preview-header {
+        background-color: #0a0a0a;
+        border-bottom: 1px solid #1a1a1a;
+        padding: 20px 0;
+    }
+
+    .header-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .header-brand {
+        font-size: 20px;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .header-dot {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .header-label {
+        font-size: 13px;
+        color: #666;
+    }
+
+    .header-badge {
+        background-color: #d4ff00;
+        color: #0a0a0a;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 4px 10px;
+        border-radius: 2px;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+        .header-container {
+            padding: 0 16px;
+        }
+
+        .header-brand {
+            font-size: 16px;
+        }
+
+        .header-label {
+            display: none;
+        }
+
+        .header-dot {
+            display: none;
+        }
+    }
+</style>
